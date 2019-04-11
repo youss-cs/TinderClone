@@ -29,7 +29,7 @@ class HomeTopStackView: UIStackView {
         }
         
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins = .init(top: 0, left: 32, bottom: 0, right: 32)
+        layoutMargins = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     required init(coder: NSCoder) {

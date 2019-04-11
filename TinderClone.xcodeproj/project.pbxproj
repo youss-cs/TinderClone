@@ -15,6 +15,7 @@
 		A15D4BA5225F7CD700911CCB /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4BA4225F7CD700911CCB /* UIView+Additions.swift */; };
 		A15D4BA7225F7D8200911CCB /* HomeTopStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4BA6225F7D8200911CCB /* HomeTopStackView.swift */; };
 		A15D4BA9225F7D9600911CCB /* HomeBottomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4BA8225F7D9600911CCB /* HomeBottomStackView.swift */; };
+		A15D4BAB225F898400911CCB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4BAA225F898400911CCB /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A15D4BA4225F7CD700911CCB /* UIView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
 		A15D4BA6225F7D8200911CCB /* HomeTopStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopStackView.swift; sourceTree = "<group>"; };
 		A15D4BA8225F7D9600911CCB /* HomeBottomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomStackView.swift; sourceTree = "<group>"; };
+		A15D4BAA225F898400911CCB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				A15D4BA6225F7D8200911CCB /* HomeTopStackView.swift */,
 				A15D4BA8225F7D9600911CCB /* HomeBottomStackView.swift */,
+				A15D4BAA225F898400911CCB /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				A15D4BA5225F7CD700911CCB /* UIView+Additions.swift in Sources */,
 				A15D4B91225F7C4A00911CCB /* ViewController.swift in Sources */,
 				A15D4BA7225F7D8200911CCB /* HomeTopStackView.swift in Sources */,
+				A15D4BAB225F898400911CCB /* CardView.swift in Sources */,
 				A15D4B8F225F7C4A00911CCB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
