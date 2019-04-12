@@ -12,17 +12,12 @@ class CardView: UIView {
     
     let thresHold: CGFloat = 80
     
-    var user: User? {
+    var cardViewModel: CardViewModel? {
         didSet {
-            guard let user = user else { return }
-            
-            imageView.image = UIImage(named: user.imageUrl)
-            
-            let attibutedText = NSMutableAttributedString(string: "\(user.name) ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
-            attibutedText.append(NSAttributedString(string: "\(user.age) \n", attributes: [.font : UIFont.systemFont(ofSize: 30, weight: .regular)]))
-            attibutedText.append(NSAttributedString(string: "\(user.profession)", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
-            
-            informationLabel.attributedText = attibutedText
+            guard let cardViewModel = cardViewModel else { return }
+            imageView.image = UIImage(named: cardViewModel.imageUrl)
+            informationLabel.attributedText = cardViewModel.attributedString
+            informationLabel.textAlignment = cardViewModel.textAlignment
         }
     }
     

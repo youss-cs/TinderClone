@@ -42,9 +42,10 @@ class HomeController: UIViewController {
     fileprivate func setupCardsDeck() {
         users.forEach { (user) in
             let cardView = CardView()
-            cardView.user = user
+            cardView.cardViewModel = CardViewModel(user: user)
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
+            
         }
     }
 
