@@ -12,9 +12,31 @@ class CardView: UIView {
     
     let thresHold: CGFloat = 80
     
+    var user: User? {
+        didSet {
+            guard let user = user else { return }
+            
+            imageView.image = UIImage(named: user.imageUrl)
+            
+            let attibutedText = NSMutableAttributedString(string: "\(user.name) ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
+            attibutedText.append(NSAttributedString(string: "\(user.age) \n", attributes: [.font : UIFont.systemFont(ofSize: 30, weight: .regular)]))
+            attibutedText.append(NSAttributedString(string: "\(user.profession)", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
+            
+            informationLabel.attributedText = attibutedText
+        }
+    }
+    
     let imageView: UIImageView = {
-        let img = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+        let img = UIImageView()
+        img.contentMode = .scaleAspectFill
         return img
+    }()
+    
+    let informationLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        return label
     }()
 
     override init(frame: CGRect) {
@@ -24,7 +46,10 @@ class CardView: UIView {
         clipsToBounds = true
         
         addSubview(imageView)
+        addSubview(informationLabel)
+        
         imageView.fillSuperview()
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
@@ -56,16 +81,18 @@ class CardView: UIView {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > thresHold
         
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
             
             if shouldDismissCard {
-                self.frame = CGRect(x: 1000 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
+                self.frame = CGRect(x: 600 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
             } else {
                 self.transform = .identity
             }
         }, completion: { (_) in
             self.transform = .identity
-            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
+            if shouldDismissCard {
+                self.removeFromSuperview()
+            }
         })
     }
     
