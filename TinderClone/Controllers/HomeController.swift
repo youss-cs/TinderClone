@@ -15,8 +15,8 @@ class HomeController: UIViewController {
     let bottomStackView = HomeBottomStackView()
     
     let users = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageUrl: "lady5c"),
-        User(name: "Jane", age: 18, profession: "Teacher", imageUrl: "lady4c")
+        User(name: "Kelly", age: 23, profession: "Music DJ", imageUrls: ["jane1","jane2","jane3"]),
+        User(name: "Jane", age: 18, profession: "Teacher", imageUrls: ["kelly1","kelly2","kelly3"])
     ]
     
     override func viewDidLoad() {

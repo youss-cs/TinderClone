@@ -9,12 +9,12 @@
 import UIKit
 
 struct CardViewModel {
-    let imageUrl: String
+    let imageUrls: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     
     init(user: User, txtAlignment: NSTextAlignment = .left) {
-        imageUrl = user.imageUrl
+        imageUrls = user.imageUrls
         
         let attrText = NSMutableAttributedString(string: "\(user.name) ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
         attrText.append(NSAttributedString(string: "\(user.age) \n", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
