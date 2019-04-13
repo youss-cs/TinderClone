@@ -10,7 +10,8 @@ import UIKit
 
 class CardView: UIView {
     
-    let thresHold: CGFloat = 80
+    fileprivate let thresHold: CGFloat = 80
+    fileprivate let gradientLayer = CAGradientLayer()
     
     var cardViewModel: CardViewModel? {
         didSet {
@@ -34,17 +35,11 @@ class CardView: UIView {
         return label
     }()
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layer.cornerRadius = 16
-        clipsToBounds = true
-        
-        addSubview(imageView)
-        addSubview(informationLabel)
-        
-        imageView.fillSuperview()
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+        setupLayout()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
@@ -54,8 +49,36 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    fileprivate func setupLayout() {
+        layer.cornerRadius = 16
+        clipsToBounds = true
+        
+        addSubview(imageView)
+        imageView.fillSuperview()
+        
+        setupGradienLayer()
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+    }
+    
+    
+    override func layoutSubviews() {
+        gradientLayer.frame = frame
+    }
+    
+    fileprivate func setupGradienLayer() {
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.1]
+        layer.addSublayer(gradientLayer)
+    }
+    
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ (subview) in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:
