@@ -21,6 +21,8 @@ class CardView: UIView {
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
+            setupImageIndexObserver()
+            
             (0..<cardViewModel.imageUrls.count).forEach { (_) in
                 let view = UIView()
                 view.backgroundColor = deselectedBarColor
@@ -90,6 +92,16 @@ class CardView: UIView {
         barStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
     }
     
+    fileprivate func setupImageIndexObserver() {
+        cardViewModel.imageIndexObserver = { (index, image) in
+            self.barStackView.arrangedSubviews.forEach { (view) in
+                view.backgroundColor = self.deselectedBarColor
+            }
+            self.barStackView.arrangedSubviews[index].backgroundColor = .white
+            self.imageView.image = image
+        }
+    }
+    
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
@@ -111,16 +123,10 @@ class CardView: UIView {
         let shouldMoveNextPhoto = location.x > self.frame.width / 2 ? true : false
         
         if shouldMoveNextPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageUrls.count - 1)
+            cardViewModel.goToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousPhoto()
         }
-        
-        barStackView.arrangedSubviews.forEach { (view) in
-            view.backgroundColor = deselectedBarColor
-        }
-        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
-        imageView.image = UIImage(named: cardViewModel.imageUrls[imageIndex])
     }
     
     fileprivate func handleChanged(_ gesture: UIPanGestureRecognizer) {

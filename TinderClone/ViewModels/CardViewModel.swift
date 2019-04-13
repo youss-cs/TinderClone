@@ -8,10 +8,19 @@
 
 import UIKit
 
-struct CardViewModel {
+class CardViewModel {
     let imageUrls: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
+    
+    var imageIndexObserver: ((Int, UIImage?) -> ())?
+    
+    fileprivate var imageIndex = 0 {
+        didSet {
+            let image = UIImage(named: imageUrls[imageIndex])
+            imageIndexObserver?(imageIndex,image)
+        }
+    }
     
     init(user: User, txtAlignment: NSTextAlignment = .left) {
         imageUrls = user.imageUrls
@@ -22,5 +31,13 @@ struct CardViewModel {
         
         attributedString = attrText
         textAlignment = txtAlignment
+    }
+    
+    func goToNextPhoto() {
+        imageIndex = min(imageIndex + 1, imageUrls.count - 1)
+    }
+    
+    func goToPreviousPhoto() {
+        imageIndex = max(0, imageIndex - 1)
     }
 }
