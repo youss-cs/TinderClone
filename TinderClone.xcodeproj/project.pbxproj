@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11719C322637116009DCC7B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11719C222637116009DCC7B /* RegistrationViewModel.swift */; };
 		A15D4B8F225F7C4A00911CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4B8E225F7C4A00911CCB /* AppDelegate.swift */; };
 		A15D4B91225F7C4A00911CCB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4B90225F7C4A00911CCB /* HomeController.swift */; };
 		A15D4B94225F7C4A00911CCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A15D4B92225F7C4A00911CCB /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A11719C222637116009DCC7B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		A15D4B8B225F7C4A00911CCB /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15D4B8E225F7C4A00911CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A15D4B90225F7C4A00911CCB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				A1BB62D72260E9290006FD5D /* CardViewModel.swift */,
+				A11719C222637116009DCC7B /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A15D4BA9225F7D9600911CCB /* HomeBottomStackView.swift in Sources */,
+				A11719C322637116009DCC7B /* RegistrationViewModel.swift in Sources */,
 				A18114222262371100F1864E /* RegistrationController.swift in Sources */,
 				A15D4BA5225F7CD700911CCB /* UIView+Additions.swift in Sources */,
 				A15D4B91225F7C4A00911CCB /* HomeController.swift in Sources */,
