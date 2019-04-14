@@ -23,6 +23,7 @@
 		A1BB62D42260D5460006FD5D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BB62D32260D5460006FD5D /* User.swift */; };
 		A1BB62D82260E9290006FD5D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BB62D72260E9290006FD5D /* CardViewModel.swift */; };
 		A1E432BE2263807700C873E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1E432BD2263807700C873E5 /* GoogleService-Info.plist */; };
+		A1E432C12263850F00C873E5 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E432C02263850F00C873E5 /* Bindable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		A1BB62D32260D5460006FD5D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1BB62D72260E9290006FD5D /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		A1E432BD2263807700C873E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A1E432C02263850F00C873E5 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		BCC15DDEA777BABDF9326C96 /* Pods-TinderClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinderClone/Pods-TinderClone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 		A15D4B8D225F7C4A00911CCB /* TinderClone */ = {
 			isa = PBXGroup;
 			children = (
+				A1E432BF226384E900C873E5 /* Utils */,
 				A15D4BA1225F7C7200911CCB /* Extensions */,
 				A1BB62D22260D5340006FD5D /* Models */,
 				A15D4BA0225F7C6500911CCB /* Views */,
@@ -147,6 +150,14 @@
 				A11719C222637116009DCC7B /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A1E432BF226384E900C873E5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A1E432C02263850F00C873E5 /* Bindable.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F62455A23BDC9090F0439D3D /* Pods */ = {
@@ -291,6 +302,7 @@
 			files = (
 				A15D4BA9225F7D9600911CCB /* HomeBottomStackView.swift in Sources */,
 				A11719C322637116009DCC7B /* RegistrationViewModel.swift in Sources */,
+				A1E432C12263850F00C873E5 /* Bindable.swift in Sources */,
 				A18114222262371100F1864E /* RegistrationController.swift in Sources */,
 				A15D4BA5225F7CD700911CCB /* UIView+Additions.swift in Sources */,
 				A15D4B91225F7C4A00911CCB /* HomeController.swift in Sources */,
