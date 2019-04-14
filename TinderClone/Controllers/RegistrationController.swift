@@ -28,6 +28,7 @@ class RegistrationController: UIViewController {
     let fullNameTextField: CustomTextField = {
         let tf = CustomTextField(padding: 24, height: 44)
         tf.placeholder = "Enter full name"
+        tf.autocapitalizationType = .words
         tf.backgroundColor = .white
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
@@ -36,6 +37,7 @@ class RegistrationController: UIViewController {
         let tf = CustomTextField(padding: 24, height: 44)
         tf.placeholder = "Enter email"
         tf.keyboardType = .emailAddress
+        tf.autocapitalizationType = .none
         tf.backgroundColor = .white
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
@@ -65,6 +67,7 @@ class RegistrationController: UIViewController {
     
     let gradientLayer = CAGradientLayer()
     let registrationViewModel = RegistrationViewModel()
+    let registeringHUD = JGProgressHUD(style: .dark)
     
     lazy var verticalStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [fullNameTextField, emailTextField, passwordTextField, registerButton])
@@ -83,7 +86,7 @@ class RegistrationController: UIViewController {
         setupLayout()
         setupKeyboardObservers()
         setupTapGesture()
-        setupIsFormValidObserver()
+        setupRegistrationObservers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,7 +113,7 @@ class RegistrationController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
     }
     
-    fileprivate func setupIsFormValidObserver() {
+    fileprivate func setupRegistrationObservers() {
         registrationViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
             guard let isFormValid = isFormValid else { return }
             self.registerButton.isEnabled = isFormValid
@@ -118,6 +121,14 @@ class RegistrationController: UIViewController {
         }
         registrationViewModel.bindableImage.bind { [unowned self] (img) in
             self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        registrationViewModel.bindableIsRegistring.bind { [unowned self] (isRegistering) in
+            if isRegistering == true {
+                self.registeringHUD.textLabel.text = "Registering..."
+                self.registeringHUD.show(in: self.view)
+            } else {
+                self.registeringHUD.dismiss()
+            }
         }
     }
     
@@ -139,16 +150,12 @@ class RegistrationController: UIViewController {
     
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+        registrationViewModel.performRegitration { (error) in
             if let error = error {
                 self.showHUDWithError(error: error)
                 return
             }
-            
-            print("Successfully registred: " + (result?.user.uid ?? ""))
         }
     }
     
@@ -195,6 +202,7 @@ class RegistrationController: UIViewController {
         hud.detailTextLabel.text = error.localizedDescription
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 4)
+        registeringHUD.dismiss()
     }
     
 }
