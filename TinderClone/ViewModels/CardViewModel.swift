@@ -14,12 +14,12 @@ class CardViewModel {
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     
-    var imageIndexObserver: ((Int, UIImage?) -> ())?
+    var imageIndexObserver: ((Int, String?) -> ())?
     
     fileprivate var imageIndex = 0 {
         didSet {
-            let image = UIImage(named: imageUrls[imageIndex])
-            imageIndexObserver?(imageIndex,image)
+            let imageURL = imageUrls[imageIndex]
+            imageIndexObserver?(imageIndex, imageURL)
         }
     }
     
