@@ -15,6 +15,8 @@ class SettingsController: UITableViewController {
     lazy var image2Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
     
+    let titles = ["Name", "Profession", "Age", "Bio"]
+    
     @objc func handleSelectPhoto(button: UIButton) {
         print("Select photo with button:", button)
         let imagePicker = CustomImagePickerController()
@@ -60,39 +62,20 @@ class SettingsController: UITableViewController {
         return header
     }()
     
-    class HeaderLabel: UILabel {
-        override func drawText(in rect: CGRect) {
-            super.drawText(in: rect.insetBy(dx: 16, dy: 0))
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return header
-        }
-        let headerLabel = HeaderLabel()
-        switch section {
-        case 1:
-            headerLabel.text = "Name"
-        case 2:
-            headerLabel.text = "Profession"
-        case 3:
-            headerLabel.text = "Age"
-        default:
-            headerLabel.text = "Bio"
-        }
-        return headerLabel
+        return section == 0 ? header : nil
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 300
-        }
-        return 40
+        return section == 0 ? 300 : 40
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return titles.count + 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? nil : titles[section - 1]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,18 +84,7 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
-        
-        switch indexPath.section {
-        case 1:
-            cell.textField.placeholder = "Enter Name"
-        case 2:
-            cell.textField.placeholder = "Enter Profession"
-        case 3:
-            cell.textField.placeholder = "Enter Age"
-        default:
-            cell.textField.placeholder = "Enter Bio"
-        }
-        
+        cell.textField.placeholder = "Enter \(titles[indexPath.section - 1])"
         return cell
     }
     
@@ -136,8 +108,8 @@ class SettingsController: UITableViewController {
 extension SettingsController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[.originalImage] as? UIImage
-        // how do i set the image on my buttons when I select a photo?
         let imageButton = (picker as? CustomImagePickerController)?.imageButton
+        
         imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         dismiss(animated: true)
     }
