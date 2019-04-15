@@ -77,8 +77,9 @@ class HomeController: UIViewController {
     }
     
     @objc func handleSettings() {
-        let registrationController = RegistrationController()
-        present(registrationController, animated: true)
+        let settingsController = SettingsController()
+        let nav = UINavigationController(rootViewController: settingsController)
+        present(nav, animated: true)
     }
     
     @objc func handleRefresh() {
