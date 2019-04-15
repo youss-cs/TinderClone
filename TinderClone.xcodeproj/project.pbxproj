@@ -11,7 +11,6 @@
 		A10721AF2264DDF700ADD42D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10721AE2264DDF700ADD42D /* SettingsController.swift */; };
 		A10721B12264DE7E00ADD42D /* CustomImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10721B02264DE7E00ADD42D /* CustomImagePickerController.swift */; };
 		A10721B32264E38E00ADD42D /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10721B22264E38E00ADD42D /* SettingsCell.swift */; };
-		A10721B52264E3B300ADD42D /* SettingsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10721B42264E3B300ADD42D /* SettingsTextField.swift */; };
 		A11719C322637116009DCC7B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11719C222637116009DCC7B /* RegistrationViewModel.swift */; };
 		A15D4B8F225F7C4A00911CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4B8E225F7C4A00911CCB /* AppDelegate.swift */; };
 		A15D4B91225F7C4A00911CCB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4B90225F7C4A00911CCB /* HomeController.swift */; };
@@ -36,7 +35,6 @@
 		A10721AE2264DDF700ADD42D /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		A10721B02264DE7E00ADD42D /* CustomImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePickerController.swift; sourceTree = "<group>"; };
 		A10721B22264E38E00ADD42D /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
-		A10721B42264E3B300ADD42D /* SettingsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextField.swift; sourceTree = "<group>"; };
 		A11719C222637116009DCC7B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		A15D4B8B225F7C4A00911CCB /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15D4B8E225F7C4A00911CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				A10721B02264DE7E00ADD42D /* CustomImagePickerController.swift */,
 				A10721B22264E38E00ADD42D /* SettingsCell.swift */,
 				A18114232262375300F1864E /* CustomTextField.swift */,
-				A10721B42264E3B300ADD42D /* SettingsTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,7 +321,6 @@
 				A15D4BA7225F7D8200911CCB /* HomeTopStackView.swift in Sources */,
 				A1BB62D82260E9290006FD5D /* CardViewModel.swift in Sources */,
 				A15D4BAB225F898400911CCB /* CardView.swift in Sources */,
-				A10721B52264E3B300ADD42D /* SettingsTextField.swift in Sources */,
 				A15D4B8F225F7C4A00911CCB /* AppDelegate.swift in Sources */,
 				A1BB62D42260D5460006FD5D /* User.swift in Sources */,
 				A10721B32264E38E00ADD42D /* SettingsCell.swift in Sources */,

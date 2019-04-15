@@ -11,7 +11,7 @@ import UIKit
 class SettingsCell: UITableViewCell {
     
     let textField: UITextField = {
-        let tf = SettingsTextField()
+        let tf = CustomTextField(padding: 16, height: 44)
         tf.placeholder = "Enter Name"
         return tf
     }()
