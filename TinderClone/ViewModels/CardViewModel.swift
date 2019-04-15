@@ -26,9 +26,12 @@ class CardViewModel {
     init(user: User, txtAlignment: NSTextAlignment = .left) {
         imageUrls = [user.imageUrl1 ?? ""]
         
+        let ageString = user.age != nil ? "\(user.profession!)" : "N\\A"
+        let professionString = user.profession != nil ? user.profession! : "Not available"
         let attrText = NSMutableAttributedString(string: "\(user.name ?? "") ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attrText.append(NSAttributedString(string: "\(user.age ?? 0) \n", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
-        attrText.append(NSAttributedString(string: "\(user.profession ?? "")", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        
+        attrText.append(NSAttributedString(string: "\(ageString) \n", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
+        attrText.append(NSAttributedString(string: professionString, attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .regular)]))
         
         attributedString = attrText
         textAlignment = txtAlignment

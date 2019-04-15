@@ -16,7 +16,7 @@ struct User {
     var imageUrl1: String?
     
     init(dictionary: [String : Any]) {
-        id = dictionary["id"] as? String
+        id = dictionary["uid"] as? String
         name = dictionary["name"] as? String
         age = dictionary["age"] as? Int
         profession = dictionary["profession"] as? String

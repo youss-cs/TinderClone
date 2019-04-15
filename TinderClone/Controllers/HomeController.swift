@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class HomeController: UIViewController {
 
@@ -15,6 +16,7 @@ class HomeController: UIViewController {
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomStackView()
     var cardViewModels = [CardViewModel]()
+    var lastFetchUser: User?
     
     /*let users = [
         User(name: "Kelly", age: 23, profession: "Music DJ", imageUrls: ["jane1","jane2","jane3"]),
@@ -25,6 +27,7 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        bottomStackView.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         
         setupLayout()
         fetchUsers()
@@ -44,7 +47,13 @@ class HomeController: UIViewController {
     }
     
     fileprivate func fetchUsers() {
-        Firestore.firestore().collection("Users").getDocuments { (snapshot, error) in
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Fetching Users"
+        hud.show(in: view)
+        
+        let query = Firestore.firestore().collection("Users").order(by: "uid").start(after: [lastFetchUser?.id ?? ""]).limit(to: 2)
+        query.getDocuments { (snapshot, error) in
+            hud.dismiss()
             if let error = error{
                 print(error.localizedDescription)
                 return
@@ -54,25 +63,26 @@ class HomeController: UIViewController {
                 let user = User(dictionary: documentSnapshot.data())
                 let cardViewModel = CardViewModel(user: user)
                 self.cardViewModels.append(cardViewModel)
+                self.setupUserCard(cardViewModel)
+                self.lastFetchUser = user
             })
-            
-            self.setupCardsDeck()
         }
     }
     
-    fileprivate func setupCardsDeck() {
-        cardViewModels.forEach { (cardViewModel) in
-            let cardView = CardView()
-            cardView.cardViewModel = cardViewModel
-            cardsDeckView.addSubview(cardView)
-            cardView.fillSuperview()
-            
-        }
+    fileprivate func setupUserCard(_ cardViewModel: CardViewModel) {
+        let cardView = CardView()
+        cardView.cardViewModel = cardViewModel
+        cardsDeckView.addSubview(cardView)
+        cardView.fillSuperview()
     }
     
     @objc func handleSettings() {
         let registrationController = RegistrationController()
         present(registrationController, animated: true)
+    }
+    
+    @objc func handleRefresh() {
+        fetchUsers()
     }
 
 }
