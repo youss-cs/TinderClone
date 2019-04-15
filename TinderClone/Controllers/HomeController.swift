@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeController: UIViewController {
 
     let topStackView = HomeTopStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomStackView()
+    var cardViewModels = [CardViewModel]()
     
-    let users = [
+    /*let users = [
         User(name: "Kelly", age: 23, profession: "Music DJ", imageUrls: ["jane1","jane2","jane3"]),
         User(name: "Jane", age: 18, profession: "Teacher", imageUrls: ["kelly1","kelly2","kelly3"])
-    ]
+    ]*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class HomeController: UIViewController {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         
         setupLayout()
-        setupCardsDeck()
+        fetchUsers()
     }
     
     fileprivate func setupLayout() {
@@ -41,10 +43,27 @@ class HomeController: UIViewController {
         overallStackView.bringSubviewToFront(cardsDeckView)
     }
     
+    fileprivate func fetchUsers() {
+        Firestore.firestore().collection("Users").getDocuments { (snapshot, error) in
+            if let error = error{
+                print(error.localizedDescription)
+                return
+            }
+            
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let user = User(dictionary: documentSnapshot.data())
+                let cardViewModel = CardViewModel(user: user)
+                self.cardViewModels.append(cardViewModel)
+            })
+            
+            self.setupCardsDeck()
+        }
+    }
+    
     fileprivate func setupCardsDeck() {
-        users.forEach { (user) in
+        cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView()
-            cardView.cardViewModel = CardViewModel(user: user)
+            cardView.cardViewModel = cardViewModel
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
             

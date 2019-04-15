@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardViewModel {
     let imageUrls: [String]
@@ -23,11 +24,11 @@ class CardViewModel {
     }
     
     init(user: User, txtAlignment: NSTextAlignment = .left) {
-        imageUrls = user.imageUrls
+        imageUrls = [user.imageUrl1 ?? ""]
         
-        let attrText = NSMutableAttributedString(string: "\(user.name) ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attrText.append(NSAttributedString(string: "\(user.age) \n", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
-        attrText.append(NSAttributedString(string: "\(user.profession)", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        let attrText = NSMutableAttributedString(string: "\(user.name ?? "") ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
+        attrText.append(NSAttributedString(string: "\(user.age ?? 0) \n", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
+        attrText.append(NSAttributedString(string: "\(user.profession ?? "")", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .regular)]))
         
         attributedString = attrText
         textAlignment = txtAlignment

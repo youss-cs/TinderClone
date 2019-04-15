@@ -9,8 +9,17 @@
 import Foundation
 
 struct User {
-    let name: String
-    let age: Int
-    let profession: String
-    let imageUrls: [String]
+    var id: String?
+    var name: String?
+    var age: Int?
+    var profession: String?
+    var imageUrl1: String?
+    
+    init(dictionary: [String : Any]) {
+        id = dictionary["id"] as? String
+        name = dictionary["name"] as? String
+        age = dictionary["age"] as? Int
+        profession = dictionary["profession"] as? String
+        imageUrl1 = dictionary["imageUrl1"] as? String
+    }
 }

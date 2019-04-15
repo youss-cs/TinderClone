@@ -17,7 +17,10 @@ class CardView: UIView {
     
     var cardViewModel: CardViewModel! {
         didSet {
-            imageView.image = UIImage(named: cardViewModel.imageUrls.first ?? "")
+            if let url = URL(string: cardViewModel.imageUrls.first ?? "") {
+                imageView.sd_setImage(with: url)
+            }
+            
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
