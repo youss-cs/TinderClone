@@ -119,7 +119,7 @@ class LoginController: UIViewController {
         }
         loginViewModel.isLoggingIn.bind { [unowned self] (isRegistering) in
             if isRegistering == true {
-                self.loginHUD.textLabel.text = "Register"
+                self.loginHUD.textLabel.text = "LoginIn..."
                 self.loginHUD.show(in: self.view)
             } else {
                 self.loginHUD.dismiss()
