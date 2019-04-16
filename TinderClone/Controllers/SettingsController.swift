@@ -11,6 +11,10 @@ import Firebase
 import SDWebImage
 import JGProgressHUD
 
+protocol SettingsControllerDelegate {
+    func didSaveSettings()
+}
+
 class SettingsController: UITableViewController {
         
     // instance properties
@@ -20,6 +24,7 @@ class SettingsController: UITableViewController {
     
     let titles = ["Name", "Profession", "Age", "Bio", "Seeking Age Range"]
     var user: User?
+    var delegate: SettingsControllerDelegate?
     
     @objc func handleSelectPhoto(button: UIButton) {
         print("Select photo with button:", button)
@@ -203,26 +208,17 @@ class SettingsController: UITableViewController {
                 return
             }
             
-            print("Finished saving user info")
+            self.dismiss(animated: true, completion: {
+                self.delegate?.didSaveSettings()
+            })
         }
     }
     
     @objc fileprivate func handleMinAgeChange(slider: UISlider) {
-        //        print(slider.value)
-        // I want to update the minLabel in my AgeRangeCell somehow...
-        //        let indexPath = IndexPath(row: 0, section: 5)
-        //        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
-        //        ageRangeCell.minLabel.text = "Min \(Int(slider.value))"
-        //
-        //        self.user?.minSeekingAge = Int(slider.value)
         evaluateMinMax()
     }
     
     @objc fileprivate func handleMaxAgeChange(slider: UISlider) {
-        //        let indexPath = IndexPath(row: 0, section: 5)
-        //        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
-        //        ageRangeCell.maxLabel.text = "Max \(Int(slider.value))"
-        //        self.user?.maxSeekingAge = Int(slider.value)
         evaluateMinMax()
     }
     

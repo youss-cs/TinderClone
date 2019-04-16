@@ -32,7 +32,7 @@ class CardViewModel {
         
         imageUrls = imgUrls
         
-        let ageString = user.age != nil ? "\(user.profession!)" : "N\\A"
+        let ageString = user.age != nil ? "\(user.age!)" : "N\\A"
         let professionString = user.profession != nil ? user.profession! : "Not available"
         let attrText = NSMutableAttributedString(string: "\(user.name ?? "") ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
         

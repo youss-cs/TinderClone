@@ -18,6 +18,11 @@ class HomeController: UIViewController {
     var cardViewModels = [CardViewModel]()
     var lastFetchUser: User?
     
+    fileprivate let hud = JGProgressHUD(style: .dark)
+    fileprivate var user: User?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +30,24 @@ class HomeController: UIViewController {
         bottomStackView.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         
         setupLayout()
-        fetchUsers()
+        
+        hud.textLabel.text = "Loading"
+        hud.show(in: view)
+        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
+        
+        fetchUser()
+    }
+    
+    fileprivate func fetchUser() {
+        UserService.shared.fetchCurrentUser { (user, error) in
+            if let error = error {
+                print("Failed to fetch user:", error)
+                self.hud.dismiss()
+                return
+            }
+            self.user = user
+            self.fetchUsers()
+        }
     }
     
     fileprivate func setupLayout() {
@@ -42,13 +64,11 @@ class HomeController: UIViewController {
     }
     
     fileprivate func fetchUsers() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Fetching Users"
-        hud.show(in: view)
-        
-        let query = Firestore.firestore().collection("Users").order(by: "uid").start(after: [lastFetchUser?.id ?? ""]).limit(to: 2)
+        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
+        // i will introduce pagination here to page through 2 users at a time
+        let query = Firestore.firestore().collection("Users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { (snapshot, error) in
-            hud.dismiss()
+            self.hud.dismiss()
             if let error = error{
                 print(error.localizedDescription)
                 return
@@ -71,8 +91,11 @@ class HomeController: UIViewController {
         cardView.fillSuperview()
     }
     
+    
+    
     @objc func handleSettings() {
         let settingsController = SettingsController()
+        settingsController.delegate = self
         let nav = UINavigationController(rootViewController: settingsController)
         present(nav, animated: true)
     }
@@ -80,6 +103,11 @@ class HomeController: UIViewController {
     @objc func handleRefresh() {
         fetchUsers()
     }
+}
 
+extension HomeController: SettingsControllerDelegate {
+    func didSaveSettings() {
+        fetchUser()
+    }
 }
 
