@@ -24,7 +24,13 @@ class CardViewModel {
     }
     
     init(user: User, txtAlignment: NSTextAlignment = .left) {
-        imageUrls = [user.imageUrl1 ?? ""]
+        var imgUrls = [String]()
+        
+        if let url = user.imageUrl1 { imgUrls.append(url) }
+        if let url = user.imageUrl2 { imgUrls.append(url) }
+        if let url = user.imageUrl3 { imgUrls.append(url) }
+        
+        imageUrls = imgUrls
         
         let ageString = user.age != nil ? "\(user.profession!)" : "N\\A"
         let professionString = user.profession != nil ? user.profession! : "Not available"
