@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import SDWebImage
 
 class SettingsController: UITableViewController {
         
@@ -16,6 +18,7 @@ class SettingsController: UITableViewController {
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
     
     let titles = ["Name", "Profession", "Age", "Bio"]
+    var user: User?
     
     @objc func handleSelectPhoto(button: UIButton) {
         print("Select photo with button:", button)
@@ -43,6 +46,8 @@ class SettingsController: UITableViewController {
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.tableFooterView = UIView()
         tableView.keyboardDismissMode = .interactive
+        
+        fetchUser()
     }
     
     lazy var header: UIView = {
@@ -85,7 +90,39 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
         cell.textField.placeholder = "Enter \(titles[indexPath.section - 1])"
+        switch indexPath.section {
+        case 1: cell.textField.text = user?.name
+        case 2: cell.textField.text = user?.profession
+        case 3:
+            if let age = user?.age {
+                cell.textField.text = String(age)
+            }
+        default: break
+        }
         return cell
+    }
+    
+    fileprivate func fetchUser() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("Users").document(userId).getDocument(completion: { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = snapshot?.data() else { return }
+            self.user = User(dictionary: data)
+            self.tableView.reloadData()
+            self.loadUserPhoto()
+        })
+    }
+    
+    fileprivate func loadUserPhoto() {
+        if let imageUrl1 = user?.imageUrl1, let url = URL(string: imageUrl1) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
     }
     
     fileprivate func setupNavigationItems() {

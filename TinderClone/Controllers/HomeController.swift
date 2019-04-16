@@ -18,11 +18,6 @@ class HomeController: UIViewController {
     var cardViewModels = [CardViewModel]()
     var lastFetchUser: User?
     
-    /*let users = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageUrls: ["jane1","jane2","jane3"]),
-        User(name: "Jane", age: 18, profession: "Teacher", imageUrls: ["kelly1","kelly2","kelly3"])
-    ]*/
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
