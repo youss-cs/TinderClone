@@ -16,6 +16,8 @@ struct User {
     var imageUrl1: String?
     var imageUrl2: String?
     var imageUrl3: String?
+    var minSeekingAge: Int?
+    var maxSeekingAge: Int?
     
     init(dictionary: [String : Any]) {
         id = dictionary["uid"] as? String
@@ -25,5 +27,7 @@ struct User {
         imageUrl1 = dictionary["imageUrl1"] as? String
         imageUrl2 = dictionary["imageUrl2"] as? String
         imageUrl3 = dictionary["imageUrl3"] as? String
+        self.minSeekingAge = dictionary["minSeekingAge"] as? Int
+        self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int
     }
 }
