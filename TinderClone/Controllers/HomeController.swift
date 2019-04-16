@@ -21,8 +21,6 @@ class HomeController: UIViewController {
     fileprivate let hud = JGProgressHUD(style: .dark)
     fileprivate var user: User?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +34,17 @@ class HomeController: UIViewController {
         cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
         
         fetchUser()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Auth.auth().currentUser == nil {
+            let loginController = LoginController()
+            loginController.delegate = self
+            let navController = UINavigationController(rootViewController: loginController)
+            present(navController, animated: true)
+        }
     }
     
     fileprivate func fetchUser() {
@@ -107,6 +116,12 @@ class HomeController: UIViewController {
 
 extension HomeController: SettingsControllerDelegate {
     func didSaveSettings() {
+        fetchUser()
+    }
+}
+
+extension HomeController: LoginControllerDelegate {
+    func didFinishLoggingIn() {
         fetchUser()
     }
 }

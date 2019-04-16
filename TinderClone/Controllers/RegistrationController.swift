@@ -66,6 +66,19 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    let goToLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Go back", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc fileprivate func handleBack() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     let gradientLayer = CAGradientLayer()
     let registrationViewModel = RegistrationViewModel()
     let registeringHUD = JGProgressHUD(style: .dark)
@@ -185,6 +198,9 @@ class RegistrationController: UIViewController {
         overallStackView.spacing = 8
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        view.addSubview(goToLoginButton)
+        goToLoginButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
     }
     
     fileprivate func setupGradientLayer() {
