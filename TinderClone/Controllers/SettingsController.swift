@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SDWebImage
+import JGProgressHUD
 
 class SettingsController: UITableViewController {
         
@@ -91,12 +92,17 @@ class SettingsController: UITableViewController {
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
         cell.textField.placeholder = "Enter \(titles[indexPath.section - 1])"
         switch indexPath.section {
-        case 1: cell.textField.text = user?.name
-        case 2: cell.textField.text = user?.profession
+        case 1:
+            cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
+        case 2:
+            cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
         case 3:
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
         default: break
         }
         return cell
@@ -130,13 +136,49 @@ class SettingsController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
             UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
         ]
     }
     
+    @objc fileprivate func handleNameChange(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc fileprivate func handleProfessionChange(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc fileprivate func handleAgeChange(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "")
+    }
+    
     @objc fileprivate func handleCancel() {
         dismiss(animated: true)
+    }
+    
+    @objc fileprivate func handleSave() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "uid": uid,
+            "name": user?.name ?? "",
+            "imageUrl1": user?.imageUrl1 ?? "",
+            "age": user?.age ?? -1,
+            "profession": user?.profession ?? ""
+        ]
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving settings"
+        hud.show(in: view)
+        Firestore.firestore().collection("Users").document(uid).setData(docData) { (err) in
+            hud.dismiss()
+            if let err = err {
+                print("Failed to save user settings:", err)
+                return
+            }
+            
+            print("Finished saving user info")
+        }
     }
     
 }
