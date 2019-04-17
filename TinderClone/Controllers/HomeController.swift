@@ -74,7 +74,7 @@ class HomeController: UIViewController {
     
     fileprivate func fetchUsers() {
         guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
-        // i will introduce pagination here to page through 2 users at a time
+        
         let query = Firestore.firestore().collection("Users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { (snapshot, error) in
             self.hud.dismiss()
