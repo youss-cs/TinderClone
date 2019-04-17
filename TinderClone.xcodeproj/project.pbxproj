@@ -27,6 +27,7 @@
 		A19C109B22662EC200C8526E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C109A22662EC200C8526E /* UserService.swift */; };
 		A19C109D22663F9600C8526E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C109C22663F9600C8526E /* LoginController.swift */; };
 		A19C109F22663FB300C8526E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C109E22663FB300C8526E /* LoginViewModel.swift */; };
+		A1A7328422676ACA00831B1C /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A7328322676ACA00831B1C /* UserDetailsController.swift */; };
 		A1BB62D42260D5460006FD5D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BB62D32260D5460006FD5D /* User.swift */; };
 		A1BB62D82260E9290006FD5D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BB62D72260E9290006FD5D /* CardViewModel.swift */; };
 		A1E432BE2263807700C873E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1E432BD2263807700C873E5 /* GoogleService-Info.plist */; };
@@ -57,6 +58,7 @@
 		A19C109A22662EC200C8526E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A19C109C22663F9600C8526E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A19C109E22663FB300C8526E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A1A7328322676ACA00831B1C /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
 		A1BB62D32260D5460006FD5D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1BB62D72260E9290006FD5D /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		A1E432BD2263807700C873E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				A18114212262371100F1864E /* RegistrationController.swift */,
 				A10721AE2264DDF700ADD42D /* SettingsController.swift */,
 				A19C109C22663F9600C8526E /* LoginController.swift */,
+				A1A7328322676ACA00831B1C /* UserDetailsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				A10721B12264DE7E00ADD42D /* CustomImagePickerController.swift in Sources */,
 				A18114222262371100F1864E /* RegistrationController.swift in Sources */,
 				A19C109B22662EC200C8526E /* UserService.swift in Sources */,
+				A1A7328422676ACA00831B1C /* UserDetailsController.swift in Sources */,
 				A15D4BA5225F7CD700911CCB /* UIView+Additions.swift in Sources */,
 				A19C1098226627C800C8526E /* AgeRangeCell.swift in Sources */,
 				A15D4B91225F7C4A00911CCB /* HomeController.swift in Sources */,
