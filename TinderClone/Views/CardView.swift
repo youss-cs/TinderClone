@@ -10,6 +10,7 @@ import UIKit
 
 protocol CardViewDelegate {
     func didTapMoreInfo(cardViewModel: CardViewModel)
+    func didRemoveCard(cardView: CardView)
 }
 
 class CardView: UIView {
@@ -20,6 +21,7 @@ class CardView: UIView {
     fileprivate let deselectedBarColor = UIColor(white: 0, alpha: 0.1)
     fileprivate let swipingPhotosController = SwipingPhotosController(isCardViewMode: true)
     
+    var nextCardView: CardView?
     var delegate: CardViewDelegate?
     
     var cardViewModel: CardViewModel! {
@@ -158,6 +160,7 @@ class CardView: UIView {
             self.transform = .identity
             if shouldDismissCard {
                 self.removeFromSuperview()
+                self.delegate?.didRemoveCard(cardView: self)
             }
         })
     }
