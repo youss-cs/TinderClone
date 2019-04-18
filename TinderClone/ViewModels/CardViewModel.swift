@@ -34,7 +34,7 @@ class CardViewModel {
         
         let ageString = user.age != nil ? "\(user.age!)" : "N\\A"
         let professionString = user.profession != nil ? user.profession! : "Not available"
-        let attrText = NSMutableAttributedString(string: "\(user.name ?? "") ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
+        let attrText = NSMutableAttributedString(string: "\(user.fullName ?? "") ", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
         
         attrText.append(NSAttributedString(string: "\(ageString) \n", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
         attrText.append(NSAttributedString(string: professionString, attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .regular)]))

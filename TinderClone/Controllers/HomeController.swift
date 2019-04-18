@@ -73,7 +73,8 @@ class HomeController: UIViewController {
     }
     
     fileprivate func fetchUsers() {
-        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
+        let minAge = user?.minSeekingAge ?? defaultMinSeekingAge
+        let maxAge = user?.maxSeekingAge ?? defaultMaxSeekingAge
         
         let query = Firestore.firestore().collection("Users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { (snapshot, error) in
@@ -85,7 +86,7 @@ class HomeController: UIViewController {
             
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let user = User(dictionary: documentSnapshot.data())
-                if user.id != Auth.auth().currentUser?.uid {
+                if user.uid != Auth.auth().currentUser?.uid {
                     let cardViewModel = CardViewModel(user: user)
                     self.cardViewModels.append(cardViewModel)
                     self.setupUserCard(cardViewModel)

@@ -24,7 +24,7 @@ class CardView: UIView {
     var cardViewModel: CardViewModel! {
         didSet {
             if let url = URL(string: cardViewModel.imageUrls.first ?? "") {
-                imageView.sd_setImage(with: url)
+                imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder"), options: .continueInBackground)
             }
             
             informationLabel.attributedText = cardViewModel.attributedString
@@ -117,7 +117,7 @@ class CardView: UIView {
             }
             self.barStackView.arrangedSubviews[index].backgroundColor = .white
             if let url = URL(string: imageURL ?? "") {
-                self.imageView.sd_setImage(with: url)
+                self.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder"), options: .continueInBackground)
             }
         }
     }

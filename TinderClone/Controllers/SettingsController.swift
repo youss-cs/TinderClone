@@ -22,7 +22,7 @@ class SettingsController: UITableViewController {
     lazy var image2Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
     
-    let titles = ["Name", "Profession", "Age", "Bio", "Seeking Age Range"]
+    let titles = ["FullName", "Profession", "Age", "Bio", "Seeking Age Range"]
     var user: User?
     var delegate: SettingsControllerDelegate?
     
@@ -98,11 +98,14 @@ class SettingsController: UITableViewController {
             let ageRangeCell = AgeRangeCell(style: .default, reuseIdentifier: nil)
             ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
             ageRangeCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
-            // we need to set up the labels on our cell here
-            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? -1)"
-            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
-            ageRangeCell.minSlider.value = Float(user?.minSeekingAge ?? -1)
-            ageRangeCell.maxSlider.value = Float(user?.maxSeekingAge ?? -1)
+            
+            let minAge = user?.minSeekingAge ?? defaultMinSeekingAge
+            let maxAge = user?.maxSeekingAge ?? defaultMaxSeekingAge
+            
+            ageRangeCell.minLabel.text = "Min \(minAge)"
+            ageRangeCell.maxLabel.text = "Max \(maxAge)"
+            ageRangeCell.minSlider.value = Float(minAge)
+            ageRangeCell.maxSlider.value = Float(maxAge)
             return ageRangeCell
         }
         
@@ -110,7 +113,7 @@ class SettingsController: UITableViewController {
         cell.textField.placeholder = "Enter \(titles[indexPath.section - 1])"
         switch indexPath.section {
         case 1:
-            cell.textField.text = user?.name
+            cell.textField.text = user?.fullName
             cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
         case 2:
             cell.textField.text = user?.profession
@@ -126,8 +129,8 @@ class SettingsController: UITableViewController {
     }
     
     fileprivate func fetchUser() {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("Users").document(userId).getDocument(completion: { (snapshot, error) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("Users").document(uid).getDocument(completion: { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -174,7 +177,7 @@ class SettingsController: UITableViewController {
     }
     
     @objc fileprivate func handleNameChange(textField: UITextField) {
-        self.user?.name = textField.text
+        self.user?.fullName = textField.text
     }
     
     @objc fileprivate func handleProfessionChange(textField: UITextField) {
@@ -193,7 +196,7 @@ class SettingsController: UITableViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let docData: [String: Any] = [
             "uid": uid,
-            "name": user?.name ?? "",
+            "fullName": user?.fullName ?? "",
             "imageUrl1": user?.imageUrl1 ?? "",
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
