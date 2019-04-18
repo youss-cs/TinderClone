@@ -13,6 +13,7 @@
 		A10721B32264E38E00ADD42D /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10721B22264E38E00ADD42D /* SettingsCell.swift */; };
 		A11719C322637116009DCC7B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11719C222637116009DCC7B /* RegistrationViewModel.swift */; };
 		A144D5D42268B5D90076C09F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144D5D32268B5D90076C09F /* Constant.swift */; };
+		A144D5D62268CA680076C09F /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144D5D52268CA680076C09F /* PhotoController.swift */; };
 		A15D4B8F225F7C4A00911CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4B8E225F7C4A00911CCB /* AppDelegate.swift */; };
 		A15D4B91225F7C4A00911CCB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D4B90225F7C4A00911CCB /* HomeController.swift */; };
 		A15D4B94225F7C4A00911CCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A15D4B92225F7C4A00911CCB /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		A10721B22264E38E00ADD42D /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		A11719C222637116009DCC7B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		A144D5D32268B5D90076C09F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		A144D5D52268CA680076C09F /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		A15D4B8B225F7C4A00911CCB /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15D4B8E225F7C4A00911CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A15D4B90225F7C4A00911CCB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				A18114232262375300F1864E /* CustomTextField.swift */,
 				A19C1097226627C800C8526E /* AgeRangeCell.swift */,
 				A1A732872267947500831B1C /* SwipingPhotosController.swift */,
+				A144D5D52268CA680076C09F /* PhotoController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				A1E432C12263850F00C873E5 /* Bindable.swift in Sources */,
 				A10721B12264DE7E00ADD42D /* CustomImagePickerController.swift in Sources */,
 				A18114222262371100F1864E /* RegistrationController.swift in Sources */,
+				A144D5D62268CA680076C09F /* PhotoController.swift in Sources */,
 				A1A73286226786BA00831B1C /* UserDetailCell.swift in Sources */,
 				A19C109B22662EC200C8526E /* UserService.swift in Sources */,
 				A1A7328422676ACA00831B1C /* UserDetailsController.swift in Sources */,
