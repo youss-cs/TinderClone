@@ -10,20 +10,13 @@ import UIKit
 import SDWebImage
 
 class CardViewModel {
+    let uid: String?
     let imageUrls: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     
-    var imageIndexObserver: ((Int, String?) -> ())?
-    
-    fileprivate var imageIndex = 0 {
-        didSet {
-            let imageURL = imageUrls[imageIndex]
-            imageIndexObserver?(imageIndex, imageURL)
-        }
-    }
-    
     init(user: User, txtAlignment: NSTextAlignment = .left) {
+        uid = user.uid
         var imgUrls = [String]()
         
         if let url = user.imageUrl1 { imgUrls.append(url) }
@@ -41,13 +34,5 @@ class CardViewModel {
         
         attributedString = attrText
         textAlignment = txtAlignment
-    }
-    
-    func goToNextPhoto() {
-        imageIndex = min(imageIndex + 1, imageUrls.count - 1)
-    }
-    
-    func goToPreviousPhoto() {
-        imageIndex = max(0, imageIndex - 1)
     }
 }

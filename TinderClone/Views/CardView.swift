@@ -10,7 +10,7 @@ import UIKit
 
 protocol CardViewDelegate {
     func didTapMoreInfo(cardViewModel: CardViewModel)
-    func didRemoveCard(cardView: CardView)
+    func didSwipe(didLike: Bool)
 }
 
 class CardView: UIView {
@@ -29,8 +29,6 @@ class CardView: UIView {
             swipingPhotosController.cardViewModel = self.cardViewModel
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
-            
-            setupImageIndexObserver()
             
             (0..<cardViewModel.imageUrls.count).forEach { (_) in
                 let view = UIView()
@@ -61,9 +59,7 @@ class CardView: UIView {
         setupLayout()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(panGesture)
-        addGestureRecognizer(tapGesture)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,15 +93,6 @@ class CardView: UIView {
         layer.addSublayer(gradientLayer)
     }
     
-    fileprivate func setupImageIndexObserver() {
-        cardViewModel.imageIndexObserver = { (index, imageURL) in
-            self.barStackView.arrangedSubviews.forEach { (view) in
-                view.backgroundColor = self.deselectedBarColor
-            }
-            self.barStackView.arrangedSubviews[index].backgroundColor = .white
-        }
-    }
-    
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
@@ -121,17 +108,6 @@ class CardView: UIView {
     }
     
     var imageIndex = 0
-    
-    @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
-        let location = gesture.location(in: nil)
-        let shouldMoveNextPhoto = location.x > self.frame.width / 2 ? true : false
-        
-        if shouldMoveNextPhoto {
-            cardViewModel.goToNextPhoto()
-        } else {
-            cardViewModel.goToPreviousPhoto()
-        }
-    }
     
     @objc fileprivate func handleMoreInfo() {
         delegate?.didTapMoreInfo(cardViewModel: cardViewModel)
@@ -149,20 +125,14 @@ class CardView: UIView {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > thresHold
         
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
-            
-            if shouldDismissCard {
-                self.frame = CGRect(x: 600 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
-            } else {
+        if shouldDismissCard {
+            let didLike = translationDirection == 1
+            delegate?.didSwipe(didLike: didLike)
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
                 self.transform = .identity
-            }
-        }, completion: { (_) in
-            self.transform = .identity
-            if shouldDismissCard {
-                self.removeFromSuperview()
-                self.delegate?.didRemoveCard(cardView: self)
-            }
-        })
+            })
+        }
     }
     
 }
