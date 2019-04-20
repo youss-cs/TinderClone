@@ -106,7 +106,8 @@ class HomeController: UIViewController {
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let user = User(dictionary: documentSnapshot.data())
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
-                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                //let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                let hasNotSwipedBefore = true
                 if isNotCurrentUser && hasNotSwipedBefore  {
                     let cardViewModel = CardViewModel(user: user)
                     self.cardViewModels.append(cardViewModel)
@@ -173,7 +174,9 @@ class HomeController: UIViewController {
                         return
                     }
                     
-                    self.checkIfMatchExists(cardUID: cardUID)
+                    if didLike == 1 {
+                        self.checkIfMatchExists(cardUID: cardUID)
+                    }
                 }
             } else {
                 Firestore.firestore().collection("Swipes").document(uid).setData(documentData) { (err) in
@@ -182,7 +185,9 @@ class HomeController: UIViewController {
                         return
                     }
                     
-                    self.checkIfMatchExists(cardUID: cardUID)
+                    if didLike == 1 {
+                        self.checkIfMatchExists(cardUID: cardUID)
+                    }
                 }
             }
         }
@@ -232,6 +237,7 @@ class HomeController: UIViewController {
     }
     
     @objc func handleRefresh() {
+        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
         fetchUsers()
     }
 }

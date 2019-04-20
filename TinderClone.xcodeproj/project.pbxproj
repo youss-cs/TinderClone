@@ -36,6 +36,7 @@
 		A1BB62D82260E9290006FD5D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BB62D72260E9290006FD5D /* CardViewModel.swift */; };
 		A1E432BE2263807700C873E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1E432BD2263807700C873E5 /* GoogleService-Info.plist */; };
 		A1E432C12263850F00C873E5 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E432C02263850F00C873E5 /* Bindable.swift */; };
+		A1FE487D226B99270066DC08 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE487C226B99270066DC08 /* MatchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		A1BB62D72260E9290006FD5D /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		A1E432BD2263807700C873E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A1E432C02263850F00C873E5 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		A1FE487C226B99270066DC08 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		BCC15DDEA777BABDF9326C96 /* Pods-TinderClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinderClone/Pods-TinderClone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 				A19C1097226627C800C8526E /* AgeRangeCell.swift */,
 				A1A732872267947500831B1C /* SwipingPhotosController.swift */,
 				A144D5D52268CA680076C09F /* PhotoController.swift */,
+				A1FE487C226B99270066DC08 /* MatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				A1E432C12263850F00C873E5 /* Bindable.swift in Sources */,
 				A10721B12264DE7E00ADD42D /* CustomImagePickerController.swift in Sources */,
 				A18114222262371100F1864E /* RegistrationController.swift in Sources */,
+				A1FE487D226B99270066DC08 /* MatchView.swift in Sources */,
 				A144D5D62268CA680076C09F /* PhotoController.swift in Sources */,
 				A1A73286226786BA00831B1C /* UserDetailCell.swift in Sources */,
 				A19C109B22662EC200C8526E /* UserService.swift in Sources */,
