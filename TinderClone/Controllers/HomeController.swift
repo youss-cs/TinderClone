@@ -205,9 +205,15 @@ class HomeController: UIViewController {
             
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
-                print("Has matched")
+                self.presentMatchView(cardUID: cardUID)
             }
         }
+    }
+    
+    fileprivate func presentMatchView(cardUID: String) {
+        let matchView = MatchView()
+        view.addSubview(matchView)
+        matchView.fillSuperview()
     }
 
     fileprivate func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
